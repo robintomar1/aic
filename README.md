@@ -14,23 +14,29 @@ Runs on Ubuntu 22.04 (or any Docker-capable host) without needing Ubuntu 24.04 n
 | Service | Image | Purpose |
 |---------|-------|---------|
 | `dev`   | `osrf/ros:kilted-desktop` + Pixi | Development container (ROS 2 Kilted + Ubuntu 24.04) |
-| `eval`  | `ghcr.io/intrinsic-dev/aic/aic_eval` | Evaluation / simulation environment |
+| `eval`  | `ghcr.io/intrinsic-dev/aic/aic_eval` | Evaluation / simulation environment (Gazebo + rviz2) |
 
 Both containers use `network_mode: host` for Zenoh-based ROS 2 communication.
 
 ## Quick Start
 
-### 1. Clone the AIC repo
+### 1. Clone the repo (with submodule)
 
 ```bash
-mkdir -p workspace
-git clone https://github.com/intrinsic-dev/aic workspace/aic
+git clone --recurse-submodules git@github.com:robintomar1/aic.git
+cd aic
+```
+
+If already cloned without submodules:
+
+```bash
+git submodule update --init --recursive
 ```
 
 ### 2. Build and start containers
 
 ```bash
-# Allow X11 forwarding (for GUI apps like rviz2)
+# Allow X11 forwarding (for GUI apps like Gazebo, rviz2)
 xhost +local:docker
 
 # Build dev image and start both containers
@@ -77,4 +83,4 @@ docker compose down -v
 
 ## No GPU?
 
-Remove the `deploy.resources` block from the `eval` service in `docker-compose.yml` and remove the `--nvidia` flag if using distrobox separately.
+Remove the `deploy.resources` block from the `eval` service in `docker-compose.yml`.
