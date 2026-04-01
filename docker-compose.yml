@@ -19,6 +19,12 @@ services:
     stdin_open: true
     tty: true
     network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
     deploy:
       resources:
         reservations:
@@ -26,4 +32,4 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-    command: /entrypoint.sh ground_truth:=false start_aic_engine:=true
+    command: ground_truth:=false start_aic_engine:=true
