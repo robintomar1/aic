@@ -1,0 +1,29 @@
+services:
+  dev:
+    build: .
+    container_name: aic-dev
+    stdin_open: true
+    tty: true
+    network_mode: host
+    environment:
+      - DISPLAY=${DISPLAY}
+      - ROS_DOMAIN_ID=0
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./workspace:/root/ws_aic/src
+    command: bash
+
+  eval:
+    image: ghcr.io/intrinsic-dev/aic/aic_eval:latest
+    container_name: aic-eval
+    stdin_open: true
+    tty: true
+    network_mode: host
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    command: /entrypoint.sh ground_truth:=false start_aic_engine:=true

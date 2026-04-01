@@ -1,0 +1,13 @@
+# Pixi environments
+workspace/aic/.pixi/
+
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
