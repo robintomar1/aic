@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     python3-pip \
+    ros-kilted-plotjuggler-ros \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Pixi
