@@ -34,6 +34,7 @@ services:
       - NVIDIA_DRIVER_CAPABILITIES=all
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./results:/root/aic_results
     deploy:
       resources:
         reservations:
@@ -41,4 +42,4 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-    command: ground_truth:=false start_aic_engine:=true
+    command: ground_truth:=true start_aic_engine:=true

@@ -1,3 +1,4 @@
 [submodule "workspace/aic"]
 	path = workspace/aic
 	url = https://github.com/robintomar1/aic_main.git
+	branch = development
