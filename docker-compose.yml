@@ -14,6 +14,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ./workspace:/root/ws_aic/src
+      - ./data_collection:/root/aic_data
     deploy:
       resources:
         reservations:
@@ -35,6 +36,7 @@ services:
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ./results:/root/aic_results
+      - ./data_collection:/root/aic_data
     deploy:
       resources:
         reservations:
